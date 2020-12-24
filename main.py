@@ -1,7 +1,9 @@
+# python 3.x
+
 import tkinter as tk
 from tkinter import ttk
-import sqlite3
 import tkinter.messagebox as messagebox
+import sqlite3
 
 
 # ####################################
@@ -72,6 +74,9 @@ class DB:
         conn.close()
 
 
+# ####################################
+# 主类业务
+# ####################################
 class Main:
     def __init__(self, master, db):  # 初始化
         self.root = master
@@ -93,7 +98,8 @@ class Main:
         self.initUI()
         self.showData()
 
-    def initUI(self):  # 画UI
+    # 画UI
+    def initUI(self):
         tk.Label(self.root).grid(row=0)
         # 新增按钮
         tk.Button(self.root, text='新增', font=('Arial', 12),
@@ -143,24 +149,28 @@ class Main:
         self.table = table
         self.table.bind('<ButtonRelease-1>', self.treeviewClick)
 
-    def addData(self, data):  # 像列表中添加数据
+    # 像列表中添加数据
+    def addData(self, data):
         if str(type(data)) == "<class 'list'>":
             for item in data:
                 self.table.insert("", "end", values=item)
         else:
             self.table.insert("", "end", values=data)
 
-    def showData(self):  # 显示所有学生信息
+    # 显示所有学生信息
+    def showData(self):
         data = self.db.getData(None, None)
         self.clearTree()
         self.addData(data)
 
-    def onSearch(self):  # 搜索按钮被点击
+    # 搜索按钮被点击
+    def onSearch(self):
         data = self.db.getData(self.search_name.get(), self.search_sub.get())
         self.clearTree()
         self.addData(data)
 
-    def clearTree(self):  # 清空列表中的数据
+    # 清空列表中的数据
+    def clearTree(self):
         x = self.table.get_children()
         for item in x:
             self.table.delete(item)
