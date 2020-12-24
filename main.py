@@ -162,12 +162,14 @@ class Main:
         data = self.db.getData(None, None)
         self.clearTree()
         self.addData(data)
+        self.dataNow = None
 
     # 搜索按钮被点击
     def onSearch(self):
         data = self.db.getData(self.search_name.get(), self.search_sub.get())
         self.clearTree()
         self.addData(data)
+        self.dataNow = None
 
     # 清空列表中的数据
     def clearTree(self):
@@ -203,7 +205,6 @@ class Main:
         self.showData()  # 刷新数据
         self.top.destroy()  # 销毁窗口
         self.dataNow = None
-        messagebox.showinfo('提示', '修改成功')
 
     # 点击新增按钮
     def clickNew(self):
